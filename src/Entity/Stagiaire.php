@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\StagiaireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,6 +36,14 @@ class Stagiaire
 
     #[ORM\Column(length: 50)]
     private ?string $telephone = null;
+
+    #[ORM\ManyToMany(targetEntity: Inscrires::class, mappedBy: 'stagiaires')]
+    private Collection $inscrires;
+
+    public function __construct()
+    {
+        $this->inscrires = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +130,33 @@ class Stagiaire
     public function setTelephone(string $telephone): static
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Inscrires>
+     */
+    public function getInscrires(): Collection
+    {
+        return $this->inscrires;
+    }
+
+    public function addInscrire(Inscrires $inscrire): static
+    {
+        if (!$this->inscrires->contains($inscrire)) {
+            $this->inscrires->add($inscrire);
+            $inscrire->addStagiaire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInscrire(Inscrires $inscrire): static
+    {
+        if ($this->inscrires->removeElement($inscrire)) {
+            $inscrire->removeStagiaire($this);
+        }
 
         return $this;
     }

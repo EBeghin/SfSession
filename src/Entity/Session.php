@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SessionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,6 +28,14 @@ class Session
     #[ORM\ManyToOne(inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Formation $formation = null;
+
+    #[ORM\ManyToMany(targetEntity: Inscrires::class, mappedBy: 'sessions')]
+    private Collection $inscrires;
+
+    public function __construct()
+    {
+        $this->inscrires = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -80,4 +90,30 @@ class Session
         return $this;
     }
 
+    /**
+     * @return Collection<int, Inscrires>
+     */
+    public function getInscrires(): Collection
+    {
+        return $this->inscrires;
+    }
+
+    public function addInscrire(Inscrires $inscrire): static
+    {
+        if (!$this->inscrires->contains($inscrire)) {
+            $this->inscrires->add($inscrire);
+            $inscrire->addSession($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInscrire(Inscrires $inscrire): static
+    {
+        if ($this->inscrires->removeElement($inscrire)) {
+            $inscrire->removeSession($this);
+        }
+
+        return $this;
+    }
 }
