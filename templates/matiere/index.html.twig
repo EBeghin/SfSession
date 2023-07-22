@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des matières{% endblock %}
+
+{% block body %}
+<h1>Liste des matières</h1>
+
+        {% for matiere in matieres %}
+            {# <b> {{ matiere.denomination }} </b><br> #}
+            - {{ matiere.denomination }} <br>     
+    {% endfor %}
+{% endblock %}
