@@ -23,10 +23,14 @@ class SessionController extends AbstractController
     }
     
     #[Route('/session/new', name: 'new_session')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/session/{id}/edit', name: 'edit_session')]
+    public function new_edit(Session $session = null, Request $request, EntityManagerInterface $entityManager): Response
     {
-        // on crée un nouvel objet session
-        $session = new Session();
+        // si la session n'existe pas
+        if(!$session) {
+            // on crée un nouvel objet session
+            $session = new Session();
+        }
 
         // on crée un formuilaire
         $form = $this->createForm(SessionType::class, $session);
@@ -51,6 +55,8 @@ class SessionController extends AbstractController
 
         return $this->render('session/new.html.twig', [
             'formAddSession' => $form,
+            // renvoi faux ou l'id s'il existe
+            'edit' => $session->getId()
         ]);
     }
     

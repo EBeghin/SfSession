@@ -5,3 +5,8 @@ h1 {
 .btn {
     padding-top: 10px;
 }
+
+#wrapper {
+    min-height: 100vh;
+    background: radial-gradient(rgb(98, 131, 160), #dbdee3);
+}

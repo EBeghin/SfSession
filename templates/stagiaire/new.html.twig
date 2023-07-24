@@ -3,7 +3,12 @@
 {% block title %}Ajouter un stagiaire{% endblock %}
 
 {% block body %}
-    <h1>Ajouter un stagiaire</h1>
+    {# si edit (est vrai cad qu'il y a un id donc stagiaire existant) #}
+    {% if edit %}
+        <h1>Editer un stagiaire</h1>
+    {% else %}
+        <h1>Ajouter un stagiaire</h1>    
+    {% endif %}
 
     {{ form_start(formAddStagiaire) }}
         {# gestion des affichage par ligne qui regroupe des "colones" automatique selon le nombre d'éléments #}
@@ -34,8 +39,10 @@
                 {{ form_row(formAddStagiaire.telephone) }}
             </div>
         </div>
-
+        <div class="mt-3">
         {{ form_row(formAddStagiaire.Valider) }}
+        </div>
+        
     {{ form_end(formAddStagiaire) }}
 
 {% endblock %}

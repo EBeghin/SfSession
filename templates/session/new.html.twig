@@ -3,7 +3,12 @@
 {% block title %}Ajouter une session{% endblock %}
 
 {% block body %}
-    <h1>Ajouter une session</h1>
+    {# si edit (est vrai cad qu'il y a un id donc session existante) #}
+    {% if edit %}
+        <h1>Editer une session</h1>
+    {% else %}
+        <h1>Ajouter une session</h1>    
+    {% endif %}
 
     {{ form_start(formAddSession) }}
         {# gestion des affichage par ligne qui regroupe des "colones" automatique selon le nombre d'éléments #}
@@ -25,10 +30,10 @@
         </div>
         <div class="row">
             <div class="col-sm">
-                {{ form_row(formAddSession.formation) }}
+                {{ form_row(formAddSession.stagiaires) }}
             </div>
             <div class="col-sm">
-                {{ form_row(formAddSession.stagiaires) }}
+                {{ form_row(formAddSession.formation) }}
             </div>
         </div>
        
@@ -36,8 +41,10 @@
             {# {{ dump(stagiaire) }} #}
             {# <select></select> #}
         {# {% endfor %} #}
-
+        <div class="mt-3">
         {{ form_row(formAddSession.Valider) }}
+        </div>
+
     {{ form_end(formAddSession) }}
 {% endblock %}
 
