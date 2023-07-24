@@ -158,16 +158,17 @@ class Stagiaire
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->prenom." ".$this->nom;
-    }
-
+    
     // ajout fonction age
     public function getAge(): ?string
     {
         $now = new \DateTime();
         $interval = $this->dateNaissance->diff($now);
         return $interval->format("%Y");
+    }
+    
+    public function __toString()
+    {
+        return $this->prenom." ".$this->nom;
     }
 }

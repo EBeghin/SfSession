@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Session;
+use App\Form\SessionType;
 use App\Repository\SessionRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,6 +21,39 @@ class SessionController extends AbstractController
             'sessions' => $sessions,
         ]);
     }
+    
+    #[Route('/session/new', name: 'new_session')]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // on crée un nouvel objet session
+        $session = new Session();
+
+        // on crée un formuilaire
+        $form = $this->createForm(SessionType::class, $session);
+
+        // prise en charge de la requête
+        $form->handleRequest($request);
+
+        // si le formaulaire est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            // on récupère les données du formaulaire
+            $session = $form->getData();
+
+            // équivalent de prepare en PDO
+            $entityManager->persist($session);
+
+            // équivalent d'execute en PDO
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_session');
+        }
+
+        return $this->render('session/new.html.twig', [
+            'formAddSession' => $form,
+        ]);
+    }
+    
 
     #[Route('/session/{id}', name: 'showDetail_session')]
     public function showDetail(Session $session): Response
@@ -26,4 +62,5 @@ class SessionController extends AbstractController
             'session' => $session,
         ]); 
     }
+
 }

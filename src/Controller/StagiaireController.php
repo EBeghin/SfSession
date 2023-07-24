@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Stagiaire;
+use App\Form\StagiaireType;
 use App\Repository\StagiaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,6 +27,38 @@ class StagiaireController extends AbstractController
         // envoi des entreprises dans la vue
         return $this->render('stagiaire/index.html.twig', [
             'stagiaires' => $stagiaires,
+        ]);
+    }
+
+    #[Route('/stagiaire/new', name: 'new_stagiaire')]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // on crée un nouvel objet stagiaire
+        $stagiaire = new Stagiaire();
+
+        // on crée un formuilaire
+        $form = $this->createForm(StagiaireType::class, $stagiaire);
+
+        // prise en charge de la requête
+        $form->handleRequest($request);
+
+        // si le formaulaire est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            // on récupère les données du formaulaire
+            $stagiaire = $form->getData();
+
+            // équivalent de prepare en PDO
+            $entityManager->persist($stagiaire);
+
+            // équivalent d'execute en PDO
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_stagiaire');
+        }
+
+        return $this->render('stagiaire/new.html.twig', [
+            'formAddStagiaire' => $form,
         ]);
     }
 

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une session{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une session</h1>
+
+    {{ form_start(formAddSession) }}
+        {# gestion des affichage par ligne qui regroupe des "colones" automatique selon le nombre d'éléments #}
+        <div class="row">
+            <div class="col-sm">
+                {{ form_row(formAddSession.dateDebut) }}
+            </div>
+            <div class="col-sm">
+                {{ form_row(formAddSession.dateFin) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                {{ form_row(formAddSession.Denomination) }}
+            </div>
+            <div class="col-sm">
+                {{ form_row(formAddSession.nombrePlaceMax) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                {{ form_row(formAddSession.formation) }}
+            </div>
+            <div class="col-sm">
+                {{ form_row(formAddSession.stagiaires) }}
+            </div>
+        </div>
+       
+        {# {% for stagiaire in formAddSession.stagiaires %} #}
+            {# {{ dump(stagiaire) }} #}
+            {# <select></select> #}
+        {# {% endfor %} #}
+
+        {{ form_row(formAddSession.Valider) }}
+    {{ form_end(formAddSession) }}
+{% endblock %}
+
