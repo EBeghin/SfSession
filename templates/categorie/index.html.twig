@@ -5,7 +5,10 @@
 {% block body %}
     <h1>Liste des catégories</h1>
 
-            {% for categorie in categories %}
-                - {{ categorie.titre }} <br>     
+    {% for categorie in categories %}
+    <br><h4> {{ categorie.titre }} </h4>
+        {% for matiere in categorie.matieres %}
+        - {{ matiere }} <br>
+        {% endfor %}    
     {% endfor %}
 {% endblock %}

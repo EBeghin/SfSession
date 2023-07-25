@@ -3,14 +3,33 @@
 {% block title %}Détail de la session{% endblock %}
 
 {% block body %}
-    <h1>Détail de la session</h1>
-
-    
+    <h1>Détail de la session</h1><br>
+   
         <h2> {{ session.denomination }} </h2>
         <p>
         Date de début : {{ session.dateDebut|date("d m Y") }} <br>
         Date de fin : {{ session.dateFin|date("d m Y") }} <br>
-        Nombre de place maximale : {{ session.nombrePlaceMax }} <br><br>      
+        Nombre de places maximale : {{ session.nombrePlaceMax }} <br> 
+        Nombre de places restantes : {{session.getPlacesRestantes}} <br>
+        {# Matières programmées : {{ session.programmes}} #}
+        {# Autre méthode pour calculer directement le nombre de stagiaire #}
+        {# {{session.stagiaires | length}} #}
+        {# {{ session.nombrePlaceMax - session.stagiaires | length}} #}
+        {# {{ dump(session.stagiaires) }} #}
+        </p>
+
+        <h3>Stagiaires inscrits :</h3>
+        <p>
+        {% for stagiaire in session.stagiaires %}
+            - {{ stagiaire }} <br>
+        {% endfor %}
+        </p>
+
+        <h3>Matières programmées :</h3>
+        <p>
+        {% for matiere in session.programmes %}
+            - {{ matiere }} <br>
+        {% endfor %}
         </p>
 
 {% endblock %}

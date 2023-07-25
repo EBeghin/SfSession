@@ -24,6 +24,32 @@ class StagiaireRepository extends ServiceEntityRepository
 //    /**
 //     * @return Stagiaire[] Returns an array of Stagiaire objects
 //     */
+
+    public function findAllStagiairesNonInscrit(): array
+    {
+        $stagiairesNonInscrit = $qb->select('st')
+                                ->from('app\Entity\Stagiaire', 'st')
+                                ->where($qb->expr()->notIn('st.id', ))
+
+
+        // $entityManager = $this->getEntityManager();
+
+        // $query = $entityManager->createQuery(
+        //     'SELECT st
+        //     FROM app\Entity\Stagiaire st
+        //     WHERE st.id
+        //     NOT IN (
+        //         SELECT ss.stagiaire_id
+        //         FROM stagiaire_session ss
+        //         WHERE ss.session_id = $id
+        //     '
+        // );
+
+        // return $query->getResult();
+
+    }
+
+
 //    public function findByExampleField($value): array
 //    {
 //        return $this->createQueryBuilder('s')

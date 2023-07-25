@@ -7,7 +7,8 @@
 
     {% for session in sessions %}
         <a href="{{ path('showDetail_session', {'id': session.id}) }}"> {{ session.denomination }} </a>
-        <a class = "btn btn-primary" href="{{ path('edit_session', {'id': session.id}) }}">Edition</a><br><br>   
+        <a class = "btn btn-primary" href="{{ path('edit_session', {'id': session.id}) }}">Edition</a>
+        <a class = "btn btn-primary" href="{{ path('delete_session', {'id': session.id}) }}">Supprimer</a><br><br>  
     {% endfor %}
 
 {% endblock %}

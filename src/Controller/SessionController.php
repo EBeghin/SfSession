@@ -60,6 +60,17 @@ class SessionController extends AbstractController
         ]);
     }
     
+    #[Route('/session/{id}/delete', name: 'delete_session')]
+    // EntityManagerInterface gère l'interaction avec la BDD
+    public function delete(Session $session, EntityManagerInterface $entityManager)
+    {
+        // prépare à la suppression
+        $entityManager->remove($session);
+        //execute la requête
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_session');
+    }
 
     #[Route('/session/{id}', name: 'showDetail_session')]
     public function showDetail(Session $session): Response

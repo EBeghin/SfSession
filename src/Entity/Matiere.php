@@ -23,6 +23,8 @@ class Matiere
     private ?Categorie $categorie = null;
 
     #[ORM\OneToMany(mappedBy: 'matiere', targetEntity: Programme::class, orphanRemoval: true)]
+    // a vérifier
+    // #[ORM\OrderBy("denomination" = "ASC")]
     private Collection $programmes;
 
     public function __construct()

@@ -5,8 +5,7 @@
 {% block body %}
 <h1>Liste des matières</h1>
 
-        {% for matiere in matieres %}
-            {# <b> {{ matiere.denomination }} </b><br> #}
-            - {{ matiere.denomination }} <br>     
+    {% for matiere in matieres %}
+        - {{ matiere.denomination }} <br>     
     {% endfor %}
 {% endblock %}

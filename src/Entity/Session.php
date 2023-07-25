@@ -166,6 +166,13 @@ class Session
         return $this;
     }
 
+    public function getPlacesRestantes(): ?int
+    {
+        $nbrStagiaires = $this->stagiaires->count();
+        $nbPlacesRestantes = $this->nombrePlaceMax - $nbrStagiaires;
+        return $nbPlacesRestantes;
+    }
+
     public function __toString()
     {
         return $this->Denomination;

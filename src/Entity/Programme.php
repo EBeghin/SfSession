@@ -67,6 +67,6 @@ class Programme
 
     public function __toString()
     {
-        return $this->duree;
+        return $this->matiere. " (durée de ".$this->duree. " jours)";
     }
 }

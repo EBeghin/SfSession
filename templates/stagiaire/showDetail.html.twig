@@ -5,13 +5,15 @@
 {% block body %}
     <h1>Fiche stagiaire</h1>
 
-        <h3> {{ stagiaire }} </h3>
+        <h2> {{ stagiaire }} </h2>
         Sexe : {{ stagiaire.genre }} <br>
         Date de naissance : {{ stagiaire.dateNaissance|date("d m Y") }} <br>
         Age : {{ stagiaire.age }} ans<br>
         Ville : {{ stagiaire.ville }} <br>
         Email : {{ stagiaire.email }} <br>
         Téléphone : {{ stagiaire.telephone }} <br>
+{# 
+{{stagiaire.sessions | length}} #}
 
         {# récupération des sessions associées au stagiaire #}
         <h3>Session(s) prévue(s) :</h3>
