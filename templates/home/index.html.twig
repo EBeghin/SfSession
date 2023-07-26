@@ -4,4 +4,16 @@
 
 {% block body %}
 
+<h1>Bienvenue dans le Gestionnaire de formations !</h1><br>
+
+<ul>
+    <li><a href="{{ path('app_session') }}">Liste des sessions</a></li>
+    <li><a href="{{ path('app_stagiaire') }}">Liste des stagiaires</a></li>
+    <li><a href="{{ path('new_session') }}">Ajouter une session</a></li>
+    <li><a href="{{ path('new_stagiaire') }}">Ajouter un stagiaire</a></li>
+    <li><a href="{{ path('app_formation') }}">Liste des formations</a></li>
+    <li><a href="{{ path('app_matiere') }}">Liste des matières</a></li>
+    <li><a href="{{ path('app_categorie') }}">Liste des catégories</a></li>
+</ul>
+
 {% endblock %}

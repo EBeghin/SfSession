@@ -3,7 +3,7 @@
 {% block title %}Liste des sessions{% endblock %}
 
 {% block body %}
-    <h1>Liste des sessions</h1>
+    <h1>Liste des sessions</h1><br>
 
     {% for session in sessions %}
         <a href="{{ path('showDetail_session', {'id': session.id}) }}"> {{ session.denomination }} </a>

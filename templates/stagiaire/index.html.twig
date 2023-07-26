@@ -3,7 +3,7 @@
 {% block title %}Liste des stagiaires{% endblock %}
 
 {% block body %}
-    <h1>Listes des stagiaires</h1>
+    <h1>Listes des stagiaires</h1><br>
 
     {% for stagiaire in stagiaires %}
         <a href="{{ path('showDetail_stagiaire', {'id': stagiaire.id}) }}"> {{ stagiaire }} </a>

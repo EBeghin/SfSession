@@ -29,7 +29,8 @@ class StagiaireRepository extends ServiceEntityRepository
     {
         $stagiairesNonInscrit = $qb->select('st')
                                 ->from('app\Entity\Stagiaire', 'st')
-                                ->where($qb->expr()->notIn('st.id', ))
+                                ->where($qb->expr()->notIn('st.id', ));
+    }
 
 
         // $entityManager = $this->getEntityManager();
@@ -47,7 +48,6 @@ class StagiaireRepository extends ServiceEntityRepository
 
         // return $query->getResult();
 
-    }
 
 
 //    public function findByExampleField($value): array

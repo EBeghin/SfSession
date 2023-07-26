@@ -1,12 +1,30 @@
+.form-control {
+    border: none;
+}
+
+
 h1 {
-    color:  darkblue;
+    color: #1e446f;
+}
+
+a {
+    color: white;
 }
 
 .btn {
     padding-top: 10px;
 }
 
+.container {
+    padding-top: 10vh;
+    
+}
+
 #wrapper {
     min-height: 100vh;
-    background: radial-gradient(rgb(98, 131, 160), #dbdee3);
+    background: radial-gradient(rgb(167, 182, 193), #4f6d9c);
 }
+
+
+
+

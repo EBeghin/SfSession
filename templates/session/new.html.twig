@@ -5,9 +5,9 @@
 {% block body %}
     {# si edit (est vrai cad qu'il y a un id donc session existante) #}
     {% if edit %}
-        <h1>Editer une session</h1>
+        <h1>Editer une session</h1><br>
     {% else %}
-        <h1>Ajouter une session</h1>    
+        <h1>Ajouter une session</h1><br>   
     {% endif %}
 
     {{ form_start(formAddSession) }}

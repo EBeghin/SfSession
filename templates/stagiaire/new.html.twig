@@ -5,9 +5,9 @@
 {% block body %}
     {# si edit (est vrai cad qu'il y a un id donc stagiaire existant) #}
     {% if edit %}
-        <h1>Editer un stagiaire</h1>
+        <h1>Editer un stagiaire</h1><br>
     {% else %}
-        <h1>Ajouter un stagiaire</h1>    
+        <h1>Ajouter un stagiaire</h1><br>  
     {% endif %}
 
     {{ form_start(formAddStagiaire) }}
