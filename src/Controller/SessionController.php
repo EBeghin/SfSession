@@ -15,10 +15,22 @@ class SessionController extends AbstractController
 {
     #[Route('/session', name: 'app_session')]
     public function index(SessionRepository $sessionRepository): Response
-    {
+    {       
+        // appel des fonctions créer dans le repository correspondant
         $sessions = $sessionRepository->findBy([],["dateDebut" => "ASC"]);
+        $sessionsTerminees = $sessionRepository->findSessionTerminees();
+        $sessionsEnCours = $sessionRepository->findSessionEnCours();
+        $sessionsAVenir = $sessionRepository->findSessionAVenir();
+        
+
+
+        // renvoi vers la vue désiré avec les variables crées
         return $this->render('session/index.html.twig', [
             'sessions' => $sessions,
+            'sessionsTerminees' => $sessionsTerminees,
+            'sessionsEnCours' => $sessionsEnCours,
+            'sessionsAVenir' => $sessionsAVenir,
+            
         ]);
     }
     
@@ -73,10 +85,16 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}', name: 'showDetail_session')]
-    public function showDetail(Session $session): Response
+    public function showDetail(Session $session, SessionRepository $sessionRepository): Response
     {
+        // récupération de l'id de la session en cours
+        $idSession = $session->getId();
+        // récupération de la liste des stagiaires non inscrit dans la variable avec l'appel de la requete
+        $stagiaireNonInscrit = $sessionRepository->findAllStagiairesNonInscrit($idSession);
+
         return $this->render('session/showDetail.html.twig', [
             'session' => $session,
+            'stagiaireNonInscrit' => $stagiaireNonInscrit,
         ]); 
     }
 

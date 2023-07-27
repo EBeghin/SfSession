@@ -27,24 +27,32 @@ class StagiaireRepository extends ServiceEntityRepository
 
     public function findAllStagiairesNonInscrit(): array
     {
-        $stagiairesNonInscrit = $qb->select('st')
-                                ->from('app\Entity\Stagiaire', 'st')
-                                ->where($qb->expr()->notIn('st.id', ));
+        $queryBuilder = $entityManager->createQueryBuilder('s')
+                ->andWhere($queryBuilder->expr()->notIn('s.id', ))
+                ->getQuery()
+                ->getResult()
+       ;
     }
 
 
-        // $entityManager = $this->getEntityManager();
+//         SELECT
+// 	st.id,
+// 	st.prenom,
+// 	st.nom
+// FROM
+// 	stagiaire st
+// WHERE
+// 	st.id
+// NOT IN (
+// 	SELECT 
+// 		se.stagiaire_id
+// 	FROM
+// 		stagiaire_session se
+// 	WHERE
+// 		se.session_id = 2
+// 	)
 
-        // $query = $entityManager->createQuery(
-        //     'SELECT st
-        //     FROM app\Entity\Stagiaire st
-        //     WHERE st.id
-        //     NOT IN (
-        //         SELECT ss.stagiaire_id
-        //         FROM stagiaire_session ss
-        //         WHERE ss.session_id = $id
-        //     '
-        // );
+// ->andWhere("s.prenom = 'Fred'")
 
         // return $query->getResult();
 

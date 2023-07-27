@@ -23,7 +23,6 @@ class StagiaireController extends AbstractController
         // $stagiaires = $entityManager->getRepository(Stagiaire::class)->findAll();
         // on trie les noms par ordre ascendant avec findBy (2eme option des arguments)
         $stagiaires = $stagiaireRepository->findBy([],["nom" => "ASC"]);
-
         // envoi des entreprises dans la vue
         return $this->render('stagiaire/index.html.twig', [
             'stagiaires' => $stagiaires,

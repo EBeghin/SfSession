@@ -24,17 +24,66 @@ class SessionRepository extends ServiceEntityRepository
 //    /**
 //     * @return Session[] Returns an array of Session objects
 //     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+
+    // création des requêtes personnalisées pour les sessions passées, en cours et a venir
+   public function findSessionTerminees(): array
+   {
+       return $this->createQueryBuilder('s')
+           ->andWhere('s.dateFin < CURRENT_DATE()')
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
+   public function findSessionEnCours(): array
+   {
+       return $this->createQueryBuilder('s')
+           ->andWhere('s.dateDebut < CURRENT_DATE()')
+           ->andWhere('s.dateFin > CURRENT_DATE()')
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
+   public function findSessionAVenir(): array
+   {
+       return $this->createQueryBuilder('s')
+           ->andWhere('s.dateDebut > CURRENT_DATE()')
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
+   public function findAllStagiairesNonInscrit($idSession): array
+    {
+        $em = $this->getEntityManager();
+        // crée un constructeur de requete pour récupérer des objets
+        $requete = $em->createQueryBuilder();
+        $qb = $requete;
+        // sélectionner tout les stagiaires d'une session dont l'id est passé en paramètre
+        $qb->select('s')
+            // on selectionne toutes les colones de stagiaire
+            ->from('App\Entity\Stagiaire','s')
+            // on selectionne les stagiaires dans La session
+            ->leftJoin('s.sessions', 'se')
+            ->where('se.id = :id');
+
+        // on cherche les stagiaires non inscrit    
+        $requete = $em->createQueryBuilder();
+        $requete->select('st')
+        ->from('App\Entity\Stagiaire', 'st')
+        // l'expression (les résultats) de la requete actuelle ne sont pas dans les résultats la requete precedente (qb)
+        ->where($requete->expr()->NotIn('st.id', $qb->getDQL()))
+        ->setParameter(':id', $idSession);
+        // renvoi le resultat
+        $query = $requete->getQuery();
+        return $query->getResult();
+    }
+
+//    faire fonction stagiaire non inscrit avec l'id de la session
+//   créer la premiere querybuilder qui va selectionner les stagiaire d'une session dont l'id est passé en paramètre
+//   selectionner tous les stagiaire qui ne sont pas dans le resultat de la requete precedente
+
 
 //    public function findOneBySomeField($value): ?Session
 //    {

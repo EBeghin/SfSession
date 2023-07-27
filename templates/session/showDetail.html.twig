@@ -25,6 +25,14 @@
         {% endfor %}
         </p>
 
+
+        <h3>Liste des stagiaires non inscrit dans la session :</h3>
+        <p>
+        {% for stagiaire in stagiaireNonInscrit %}
+        <a href="{{ path('showDetail_stagiaire', {'id': stagiaire.id}) }}"> {{ stagiaire }} </a> <br>
+        {% endfor %}
+        </p>
+
         <h3>Matières programmées :</h3>
         <p>
         {% for matiere in session.programmes %}
