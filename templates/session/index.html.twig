@@ -10,29 +10,62 @@
         <a class = "btn btn-primary" href="{{ path('edit_session', {'id': session.id}) }}">Edition</a>
         <a class = "btn btn-primary" href="{{ path('delete_session', {'id': session.id}) }}">Supprimer</a><br><br>  
     {% endfor %} #}
+    
+    <h2>Liste des sessions passées</h2><br>
 
-    <h1>Liste des sessions passées</h1><br>
+    {# carte à intégrer #}
+    {# <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h4 class="card-title">Primary card title</h4>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div> #}
 
     {% for session in sessionsTerminees %}
-    <a href="{{ path('showDetail_session', {'id': session.id}) }}"> {{ session.denomination }} </a>
-    <a class = "btn btn-primary" href="{{ path('edit_session', {'id': session.id}) }}">Edition</a>
-    <a class = "btn btn-primary" href="{{ path('delete_session', {'id': session.id}) }}">Supprimer</a><br><br>  
+    <div class="row">
+        <div class="col-sm">
+            <a href="{{ path('showDetail_session', {'id': session.id}) }}"> {{ session.denomination }} </a>
+        </div>
+        <div class="col-sm">
+            <a class = "btn btn-primary btn-sm" href="{{ path('edit_session', {'id': session.id}) }}">Edition</a>
+            <a class = "btn btn-primary btn-sm" href="{{ path('delete_session', {'id': session.id}) }}">Supprimer</a><br><br> 
+        </div> 
+        <div class="col-sm"></div>
+        <div class="col-sm"></div>
+    </div>
     {% endfor %}
 
-    <h1>Liste des sessions en cours</h1><br>
+    <br><h2>Liste des sessions en cours</h2><br>
 
     {% for session in sessionsEnCours %}
-    <a href="{{ path('showDetail_session', {'id': session.id}) }}"> {{ session.denomination }} </a>
-    <a class = "btn btn-primary" href="{{ path('edit_session', {'id': session.id}) }}">Edition</a>
-    <a class = "btn btn-primary" href="{{ path('delete_session', {'id': session.id}) }}">Supprimer</a><br><br>  
+    <div class="row">
+        <div class="col-sm">
+            <a href="{{ path('showDetail_session', {'id': session.id}) }}"> {{ session.denomination }} </a>
+        </div>
+        <div class="col-sm">
+            <a class = "btn btn-primary btn-sm" href="{{ path('edit_session', {'id': session.id}) }}">Edition</a>
+            <a class = "btn btn-primary btn-sm" href="{{ path('delete_session', {'id': session.id}) }}">Supprimer</a><br><br> 
+        </div>
+        <div class="col-sm"></div>
+        <div class="col-sm"></div>
+    </div>    
     {% endfor %}
 
-    <h1>Liste des sessions à venir</h1><br>
+    <br><h2>Liste des sessions à venir</h2><br>
 
     {% for session in sessionsAVenir %}
-    <a href="{{ path('showDetail_session', {'id': session.id}) }}"> {{ session.denomination }} </a>
-    <a class = "btn btn-primary" href="{{ path('edit_session', {'id': session.id}) }}">Edition</a>
-    <a class = "btn btn-primary" href="{{ path('delete_session', {'id': session.id}) }}">Supprimer</a><br><br>  
+    <div class="row">
+        <div class="col-sm">
+            <a href="{{ path('showDetail_session', {'id': session.id}) }}"> {{ session.denomination }} </a>
+        </div>
+        <div class="col-sm">    
+            <a class = "btn btn-primary btn-sm" href="{{ path('edit_session', {'id': session.id}) }}">Edition</a>
+            <a class = "btn btn-primary btn-sm" href="{{ path('delete_session', {'id': session.id}) }}">Supprimer</a><br><br> 
+        </div>
+        <div class="col-sm"></div>
+        <div class="col-sm"></div>
+    </div>
     {% endfor %}
 
     

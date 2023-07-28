@@ -3,7 +3,7 @@
 }
 
 
-h1 {
+h1, h2, h3, h4 {
     color: #1e446f;
 }
 
@@ -11,8 +11,13 @@ a {
     color: white;
 }
 
-.btn {
+/* .btn {
     padding-top: 10px;
+} */
+
+.login {
+    border: 1px solid white;
+    margin: 0 20px;
 }
 
 .container {

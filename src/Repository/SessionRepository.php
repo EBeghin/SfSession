@@ -80,9 +80,36 @@ class SessionRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-//    faire fonction stagiaire non inscrit avec l'id de la session
-//   créer la premiere querybuilder qui va selectionner les stagiaire d'une session dont l'id est passé en paramètre
-//   selectionner tous les stagiaire qui ne sont pas dans le resultat de la requete precedente
+
+    public function findAllMatieresNonProgrammees($idSession): array
+    {
+        $em = $this->getEntityManager();
+        // crée un constructeur de requete pour récupérer des objets
+        $requete = $em->createQueryBuilder();
+        $qb = $requete;
+        // sélectionner tout les matiers d'une session dont l'id est passé en paramètre
+        $qb->select('m')
+            // on selectionne toutes les colones de matiere
+            ->from('App\Entity\Matiere','m')
+            // on selectionne les matieres dans programme
+            ->leftJoin('m.programmes', 'p')
+            // condition ou l'id de la session dans programme correspond à :id
+            ->where('p.session = :id');
+
+        // on cherche les matieres non inscrites   
+        $requete = $em->createQueryBuilder();
+        $requete->select('ma')
+        ->from('App\Entity\Matiere', 'ma')
+        // l'expression (les résultats) de la requete actuelle ne sont pas dans les résultats la requete precedente (qb)
+        ->where($requete->expr()->NotIn('ma.id', $qb->getDQL()))
+        ->setParameter(':id', $idSession);
+        // renvoi le resultat
+        $query = $requete->getQuery();
+        return $query->getResult();
+    }
+//    faire fonction matiere non inscrite avec l'id de la session
+//   créer la premiere querybuilder qui va selectionner les matieres d'une session dont l'id est passé en paramètre
+//   selectionner tous les matieres qui ne sont pas dans le resultat de la requete precedente
 
 
 //    public function findOneBySomeField($value): ?Session

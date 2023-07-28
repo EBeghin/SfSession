@@ -91,10 +91,12 @@ class SessionController extends AbstractController
         $idSession = $session->getId();
         // récupération de la liste des stagiaires non inscrit dans la variable avec l'appel de la requete
         $stagiaireNonInscrit = $sessionRepository->findAllStagiairesNonInscrit($idSession);
+        $matiereNonProgrammées = $sessionRepository->findAllMatieresNonProgrammees($idSession);
 
         return $this->render('session/showDetail.html.twig', [
             'session' => $session,
             'stagiaireNonInscrit' => $stagiaireNonInscrit,
+            'matiereNonProgrammées' => $matiereNonProgrammées,
         ]); 
     }
 

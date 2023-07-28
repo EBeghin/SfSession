@@ -25,15 +25,6 @@ class StagiaireRepository extends ServiceEntityRepository
 //     * @return Stagiaire[] Returns an array of Stagiaire objects
 //     */
 
-    public function findAllStagiairesNonInscrit(): array
-    {
-        $queryBuilder = $entityManager->createQueryBuilder('s')
-                ->andWhere($queryBuilder->expr()->notIn('s.id', ))
-                ->getQuery()
-                ->getResult()
-       ;
-    }
-
 
 //         SELECT
 // 	st.id,
@@ -51,10 +42,6 @@ class StagiaireRepository extends ServiceEntityRepository
 // 	WHERE
 // 		se.session_id = 2
 // 	)
-
-// ->andWhere("s.prenom = 'Fred'")
-
-        // return $query->getResult();
 
 
 

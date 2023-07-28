@@ -41,21 +41,20 @@
                           <span class="visually-hidden">(current)</span>
                         </a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_session') }}">Liste des sessions</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_stagiaire') }}">Liste des stagiaires</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_matiere') }}">Liste des matières</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_categorie') }}">Liste des catégories</a>
-                      </li>
-                      {# <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                      </li> #}
+
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Afficher les listes</a>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" href="{{ path('app_session') }}">Liste des sessions</a>
+                          <a class="dropdown-item" href="{{ path('app_stagiaire') }}">Liste des stagiaires</a>
+                          <a class="dropdown-item" href="{{ path('app_matiere') }}">Liste des matières</a>                     
+                          <a class="dropdown-item" href="{{ path('app_categorie') }}">Liste des catégories</a>
+                        </div>
+                      </li>                      
+                      
+                      {# Gestionnaire de connection/déconnection #}
+                      {# si on est connecté (app.user renvoi un booléen) #}
+                      {% if app.user %}                                            
                       <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Outils de gestion</a>
                         <div class="dropdown-menu">
@@ -63,10 +62,29 @@
                           <a class="dropdown-item" href="{{ path('new_stagiaire') }}">Ajouter un stagiaire</a>
                           {# <a class="dropdown-item" href="#">Something else here</a>
                           <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="#">Separated link</a>
-                        </div> #}
+                          <a class="dropdown-item" href="#">Separated link</a> #}
+                        </div>
                       </li>
+                      <li class="login">
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ path('app_logout')}}">Se déconnecter</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="">Mon profil</a>
+                        </li>
+                      </li>                  
+                      {% else %}
+                      <li class="login">
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ path('app_login')}}">Se connecter</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{ path('app_register')}}">S'enregistrer</a>
+                        </li>
+                      </li>
+                      {% endif %}
                     </ul>
+
                     <form class="d-flex">
                       <input class="form-control me-sm-2" type="search" placeholder="Rechercher">
                       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Rechercher</button>
