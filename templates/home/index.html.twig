@@ -4,7 +4,13 @@
 
 {% block body %}
 
-<h1>Bonjour {{ app.user.pseudo }}, bienvenue dans le Gestionnaire de formations !</h1><br>
+{# vérification d'authentification #}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+<h1>{{ app.user.pseudo }}, bienvenue dans le Gestionnaire de formations !</h1><br>
+{% else %}
+<h1>Bienvenue dans le Gestionnaire de formations !</h1><br>
+{% endif %}
+
 
 {# <ul>
     <li><a href="{{ path('app_session') }}">Liste des sessions</a></li>

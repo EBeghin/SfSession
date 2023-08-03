@@ -27,12 +27,15 @@
         <div class="col-sm">
             <a href="{{ path('showDetail_session', {'id': session.id}) }}"> {{ session.denomination }} </a>
         </div>
-        <div class="col-sm">
-            <a class = "btn btn-primary btn-sm" href="{{ path('edit_session', {'id': session.id}) }}">Edition</a>
-            <a class = "btn btn-primary btn-sm" href="{{ path('delete_session', {'id': session.id}) }}">Supprimer</a><br><br> 
-        </div> 
-        <div class="col-sm"></div>
-        <div class="col-sm"></div>
+            {# vérification si c'est le role admin qui est connecté, alors on affiche les boutons édition/supprimer #}
+            {% if is_granted('ROLE_ADMIN') %}
+            <div class="col-sm">
+                <a class = "btn btn-primary btn-sm" href="{{ path('edit_session', {'id': session.id}) }}">Edition</a>
+                <a class = "btn btn-primary btn-sm" href="{{ path('delete_session', {'id': session.id}) }}">Supprimer</a><br><br> 
+            </div> 
+            <div class="col-sm"></div>
+            <div class="col-sm"></div>
+            {% endif %}
     </div>
     {% endfor %}
 
@@ -43,12 +46,14 @@
         <div class="col-sm">
             <a href="{{ path('showDetail_session', {'id': session.id}) }}"> {{ session.denomination }} </a>
         </div>
-        <div class="col-sm">
-            <a class = "btn btn-primary btn-sm" href="{{ path('edit_session', {'id': session.id}) }}">Edition</a>
-            <a class = "btn btn-primary btn-sm" href="{{ path('delete_session', {'id': session.id}) }}">Supprimer</a><br><br> 
-        </div>
-        <div class="col-sm"></div>
-        <div class="col-sm"></div>
+            {% if is_granted('ROLE_ADMIN') %}
+            <div class="col-sm">
+                <a class = "btn btn-primary btn-sm" href="{{ path('edit_session', {'id': session.id}) }}">Edition</a>
+                <a class = "btn btn-primary btn-sm" href="{{ path('delete_session', {'id': session.id}) }}">Supprimer</a><br><br> 
+            </div>
+            <div class="col-sm"></div>
+            <div class="col-sm"></div>
+            {% endif %}
     </div>    
     {% endfor %}
 
@@ -59,12 +64,14 @@
         <div class="col-sm">
             <a href="{{ path('showDetail_session', {'id': session.id}) }}"> {{ session.denomination }} </a>
         </div>
-        <div class="col-sm">    
-            <a class = "btn btn-primary btn-sm" href="{{ path('edit_session', {'id': session.id}) }}">Edition</a>
-            <a class = "btn btn-primary btn-sm" href="{{ path('delete_session', {'id': session.id}) }}">Supprimer</a><br><br> 
-        </div>
-        <div class="col-sm"></div>
-        <div class="col-sm"></div>
+            {% if is_granted('ROLE_ADMIN') %}
+            <div class="col-sm">    
+                <a class = "btn btn-primary btn-sm" href="{{ path('edit_session', {'id': session.id}) }}">Edition</a>
+                <a class = "btn btn-primary btn-sm" href="{{ path('delete_session', {'id': session.id}) }}">Supprimer</a><br><br> 
+            </div>
+            <div class="col-sm"></div>
+            <div class="col-sm"></div>
+            {% endif %}
     </div>
     {% endfor %}
 
