@@ -66,9 +66,11 @@ class SessionController extends AbstractController
         }
 
         return $this->render('session/new.html.twig', [
-            'formAddSession' => $form,
+            'form' => $form,
             // renvoi faux ou l'id s'il existe
-            'edit' => $session->getId()
+            'edit' => $session->getId(),
+            // a verifier
+            'sessionId' => $session->getId()
         ]);
     }
     
