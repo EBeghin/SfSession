@@ -56,6 +56,17 @@ class SessionController extends AbstractController
             // on récupère les données du formaulaire
             $session = $form->getData();
 
+// ------------------------------------A VERIF ! --------------------------------------------
+            //je creer une varibale $stagiaire que je recupere dans mes data
+            // $stagiaires = $form->get('stagiaires');
+            // foreach ($stagiaires as $stagiaire){
+            //     dd($stagiaire);
+            // }
+            
+            // die();
+            // $session -> addStagiaire($stagiaire);
+// ------------------------------------A VERIF ! --------------------------------------------
+
             // équivalent de prepare en PDO
             $entityManager->persist($session);
 
@@ -93,12 +104,12 @@ class SessionController extends AbstractController
         $idSession = $session->getId();
         // récupération de la liste des stagiaires non inscrit dans la variable avec l'appel de la requete
         $stagiaireNonInscrit = $sessionRepository->findAllStagiairesNonInscrit($idSession);
-        $matiereNonProgrammées = $sessionRepository->findAllMatieresNonProgrammees($idSession);
+        $matiereNonProgrammees = $sessionRepository->findAllMatieresNonProgrammees($idSession);
 
         return $this->render('session/showDetail.html.twig', [
             'session' => $session,
             'stagiaireNonInscrit' => $stagiaireNonInscrit,
-            'matiereNonProgrammées' => $matiereNonProgrammées,
+            'matiereNonProgrammees' => $matiereNonProgrammees,
         ]); 
     }
 
